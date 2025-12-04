@@ -11,7 +11,7 @@ export const StatsView: React.FC<StatsViewProps> = ({ events }) => {
   
   // Prepare Data for Cost per Event
   const costPerEvent = events.map(event => ({
-    name: event.title.length > 15 ? event.title.substring(0, 15) + '...' : event.title,
+    name: (event.title.length > 15 ? event.title.substring(0, 15) + '...' : event.title).toUpperCase(),
     fullTitle: event.title,
     cost: event.shifts.reduce((acc, curr) => acc + (curr.totalInvoiceAmount || curr.agreedSalary || 0), 0)
   }));
@@ -54,7 +54,7 @@ export const StatsView: React.FC<StatsViewProps> = ({ events }) => {
              <ResponsiveContainer width="100%" height="100%">
                <BarChart data={costPerEvent} layout="vertical" margin={{ left: 20 }}>
                  <XAxis type="number" hide />
-                 <YAxis dataKey="name" type="category" width={120} tick={{fill: '#71717a', fontSize: 10, textTransform: 'uppercase'}} />
+                 <YAxis dataKey="name" type="category" width={120} tick={{fill: '#71717a', fontSize: 10}} />
                  <Tooltip 
                     contentStyle={{ backgroundColor: '#000', borderColor: '#27272a', color: '#fff' }}
                     cursor={{fill: 'rgba(255,255,255,0.05)'}}
